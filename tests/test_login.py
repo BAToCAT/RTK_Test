@@ -4,7 +4,7 @@ from time import sleep
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait as WDW
 from selenium.webdriver.common.by import By
-import requests
+
 
 
 def test_login(driver):
@@ -35,7 +35,7 @@ def test_remember_login(driver):
     driver.get(BASE_URL)
     user_page = driver.find_element(By.XPATH, "//*[@id='app']/main/div/div[2]/div[1]/div[2]/div[1]/div/span[2]/span").text
     assert tel in user_page
-    sleep(1)
+    
 
 def test_logout(driver):
     page = AuthPage(driver)
@@ -77,10 +77,6 @@ def test_captcha(driver):
     WDW(driver, timeout=3).until(EC.visibility_of_element_located((By.CSS_SELECTOR, '*[alt="Captcha"]')))
 
 def test_forgot_password(driver):
-    # тест провалиться из-за капчи
-    # прописан вооброжаемый ключ recovery для поля ввода присланого на почту пароля
-    #  как составить ожидание прихода пароля с опросом и в случае если его нет нажать кнопку отправить повторно?
-
     page = AuthPage(driver)
     page.wrong_tel(tel)
     mail_choice_btn = page.driver.find_element(By.XPATH, '//*[@class="rt-radio__label"]')
@@ -93,17 +89,3 @@ def test_max_char(driver):
     page = AuthPage(driver)
     page.login_user(oversize_login, pwd)
 
-    # пробовал:
-    # url = driver.current_url
-    # response = requests.get(url)
-    # print(response.status_code)
-
-    # пробовал:
-    # driver.switch_to_window(driver.window_handles[1])
-    # url = driver.current_url
-    # response = requests.get(url)
-    # print(response.status_code)
-
-    sleep(3)
-    # driver.save_screenshot("reg1.png")
-    # как прописать редирект и отследить статус код?
