@@ -12,6 +12,7 @@ class AuthLocators:
     help_btn = (By.XPATH, "//*[@id='faq-open']/a")
     fgt_btn = (By.ID, "forgot_password")
     forgot_forward = (By.ID, "reset")
+    
 class RegLocators:
     reg_btn = (By.ID, "kc-register")
     first_name = (By.CSS_SELECTOR, "*[name='firstName']")
